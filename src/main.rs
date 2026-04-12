@@ -8,18 +8,14 @@ use rand::thread_rng;
 use graph::generate_random_expander;
 use encode::encode;
 
+mod benchmark;
+
 fn main() {
     println!("Hello, world!");
 
     let mut rng=thread_rng();
-    let a=Fr::rand(&mut rng);
-    let b=Fr::rand(&mut rng);
-
-    let c=a+b;
-
-    println!("a + b = {:?}",c);
-
-    let n=5; let m=20; let d=3;
+    
+    let n=5; let m=10; let d=3;
 
     let message:Vec<Fr>=(0..n).map(|_|Fr::rand(&mut rng)).collect();
     println!("Message {:?}", message);
@@ -29,5 +25,7 @@ fn main() {
 
     let codeword=encode(&message, &graph);
     println!("Codeword: {:?}", codeword);
+
+    benchmark::run_benchmarks();
 
 }
